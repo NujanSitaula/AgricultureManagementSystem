@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "./config.php";
+require "../config.php";
 if(isset($_SESSION['IS_LOGIN'])){
 	header("Location: loggedin.php");
 }
@@ -76,11 +76,11 @@ if(isset($_SESSION['EMAIL'])){
 			<title>Checkpoint - AGREM.</title>
 
 			<!-- Vendor css -->
-			<link href="./lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-			<link href="./lib/Ionicons/css/ionicons.css" rel="stylesheet">
+			<link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+			<link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
 
 			<!-- Slim CSS -->
-			<link rel="stylesheet" href="./css/slim.css">
+			<link rel="stylesheet" href="../assets/css/slim.css">
 
 		</head>
 		<body>
@@ -116,43 +116,12 @@ if(isset($_SESSION['EMAIL'])){
 				</div><!-- signin-left -->
 			</div><!-- d-flex -->
 
-			<script src="./lib/jquery/js/jquery.js"></script>
-			<script src="./lib/popper.js/js/popper.js"></script>
-			<script src="./lib/bootstrap/js/bootstrap.js"></script>
+			<script src="../lib/jquery/js/jquery.js"></script>
+			<script src="../lib/popper.js/js/popper.js"></script>
+			<script src="../lib/bootstrap/js/bootstrap.js"></script>
 
-			<script src="./js/slim.js"></script>
-			<script>
-				$(function(){
-					'use strict'
+			<script src="../assets/js/slim.js"></script>
 
-					$('.form-layout .form-control').on('focusin', function(){
-						$(this).closest('.form-group').addClass('form-group-active');
-					});
-
-					$('.form-layout .form-control').on('focusout', function(){
-						$(this).closest('.form-group').removeClass('form-group-active');
-					});
-
-					// Select2
-					$('.select2').select2({
-						minimumResultsForSearch: Infinity
-					});
-
-					$('#select2-a, #select2-b').select2({
-						minimumResultsForSearch: Infinity
-					});
-
-					$('#select2-a').on('select2:opening', function (e) {
-						$(this).closest('.form-group').addClass('form-group-active');
-					});
-
-					$('#select2-a').on('select2:closing', function (e) {
-						$(this).closest('.form-group').removeClass('form-group-active');
-					});
-
-				});
-
-			</script>
 
 		</body>
 	</html>

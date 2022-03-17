@@ -8,7 +8,7 @@
     use PHPMailer\PHPMailer\Exception;
     session_start();
     if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
-        header("Location: checkpoint.php");
+        header("Location: smscheckpoint.php");
     }
     if(isset($_POST['submit']))
         {
@@ -16,16 +16,16 @@
     $res=mysqli_query($con,"SELECT * FROM ams_users WHERE Phone='$phone'");
     $GreetName = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $count=mysqli_num_rows($res);
-    if($count>0){
+    if($count == 0){
     	$otp=rand(11111,99999);
-    	mysqli_query($con,"UPDATE ams_users SET OTP='$otp' WHERE Phone='$phone'");
+    	mysqli_query($con,"INSERT INTO ams_users (OTP, Phone) VALUES ('$otp', '$phone') ") or die("Error!" . $con -> error);
 
     	$_SESSION['EMAIL']=$phone;
 
       $args = http_build_query(array(
                   'auth_token'=> '1c2f4c96f4af3cd74a7c9bccf03a4cf6284cc18360dbbce2112f52e9de4446b6',
                   'to'    => '977'. $phone,
-                  'text'  => 'Your OTP code for AGRIM is: '. $otp . ' Do not share this code with anyone.'));
+                  'text'  => 'Welcome to AGRIM. Your OTP code for AGRIM is: '. $otp . ' Do not share this code with anyone.'));
           $url = "https://sms.aakashsms.com/sms/v3/send/";
 
           # Make the call using API.
@@ -42,7 +42,7 @@
 
 
     }else{
-      $Error = "<strong>Opps!</strong> Unable find account with this Phone.";
+      $Error = "<strong>Opps!</strong> Account already exists with this Number.";
     }
     }
 
@@ -104,9 +104,9 @@
            <div class="signin-right">
 
              <div class="signin-box">
-               <h2 class="signin-title-primary">Welcome Back!</h2>
-               <h3 class="signin-title-secondary">Sign in to continue.</h3>
-               <form method="post" action="authsms.php">
+               <h2 class="signin-title-primary">Welcome to AGRIM!</h2>
+               <h3 class="signin-title-secondary">Creating a account is easy.</h3>
+               <form method="post" action="smsregister.php">
                <div class="form-group">
                   <?php if(!empty($Error)):
                     echo "<div class='alert alert-danger' role='alert'>
@@ -117,7 +117,7 @@
 
                       ?>
                  <input type="number" name="phone" maxlength="10" class="form-control" placeholder="Enter Your Phone Number">
-                 <p class="mg-b-0 text-right">or login via <a href="./auth.php">Email Address</a></p>
+                 <p class="mg-b-0 text-right">or register via <a href="./register.php">Email Address</a></p>
                </div><!-- form-group -->
                <input type="submit" class="btn btn-primary btn-block btn-signin" name="submit" value="Send OTP">
              </form>

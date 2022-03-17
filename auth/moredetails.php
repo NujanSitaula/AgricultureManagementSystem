@@ -1,25 +1,23 @@
 <?php
-require "./config.php";
+require "../config.php";
 session_start();
 
-$checkUser = $_SESSION['EMAIL'];
+$checkUser = $_SESSION['IS_LOGIN'];
+$checkEmail = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$checkUser'");
+$countUser = mysqli_fetch_array($checkEmail, MYSQLI_ASSOC);
+$userEmail = $countUser['Email'];
+echo $userEmail;
+echo "<img src='../assets/uploads/" .$countUser['dprofile']. "'>";
 if(isset($_POST[saveProfile])){
   $profileImage = time() . '_agrim_' . $_FILES['uploadImage']['name'];
 
-  $outcome = 'uploads/' . $profileImage;
+  $outcome = '../assets/uploads/' . $profileImage;
 
   if(move_uploaded_file($_FILES['uploadImage']['tmp_name'], $outcome)){
-    $sql = "INSERT INTO ams_users (dprofile) VALUES ('$profileImage')";
+    $sql = mysqli_query($con, "UPDATE ams_users SET dprofile = '$profileImage' WHERE authToken = '$checkUser'") or die("Error!" . $con -> error);
   }
 
 }
-
-//Generating Auth Token for user validity
-//Generate a random string.
-$authToken = openssl_random_pseudo_bytes(16);
-//Convert the binary data into hexadecimal representation.
-$authToken = bin2hex($authToken);
-echo $authToken;
  ?>
 
 
@@ -56,11 +54,11 @@ echo $authToken;
     <title>Complete your signup process.</title>
 
     <!-- Vendor css -->
-    <link href="./lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="./lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
 
     <!-- Slim CSS -->
-    <link rel="stylesheet" href="./css/slim.css">
+    <link rel="stylesheet" href="../assets/css/slim.css">
 
   </head>
   <body>
@@ -74,7 +72,7 @@ echo $authToken;
         <h3 class="signin-title-primary">Complete Your Signup Process</h3>
         <h5 class="signin-title-secondary lh-4">It's easy to fill and only takes a minute.</h5>
 <div class="col-mid-12 text-center">
-  <img src="./img/img0.jpg" class="img-fluid rounded-circle mb-2" id="profileDisplay" width="90" alt=""><br>
+  <img src="../assets/img/img0.jpg" class="img-fluid rounded-circle mb-2" id="profileDisplay" width="90" alt=""><br>
   <button class="btn btn-primary btn-signin" onclick="getProfile()">Upload Profile Photo</button>
   <form action="moredetails.php" enctype="multipart/form-data" method="post">
   <input type="file" style="display: none;" name="uploadImage" onchange="displayImage(this)" id="uploadImage">
@@ -106,11 +104,11 @@ echo $authToken;
 
     </div><!-- signin-wrapper -->
 
-    <script src="./lib/jquery/js/jquery.js"></script>
-    <script src="./lib/popper.js/js/popper.js"></script>
-    <script src="./lib/bootstrap/js/bootstrap.js"></script>
+    <script src="../lib/jquery/js/jquery.js"></script>
+    <script src="../lib/popper.js/js/popper.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.js"></script>
 
-    <script src="./js/slim.js"></script>
+    <script src="../assets/js/slim.js"></script>
     <script type="text/javascript">
         function getProfile(){
           document.querySelector('#uploadImage').click();

@@ -1,14 +1,14 @@
 <?php
-require "./config.php";
-require "./includes/Exception.php";
-require "./includes/PHPMailer.php";
-require "./includes/SMTP.php";
+require "../config.php";
+require "../includes/Exception.php";
+require "../includes/PHPMailer.php";
+require "../includes/SMTP.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 session_start();
-if ($_SESSION["EMAIL"] || $_SESSION["IS_LOGIN"] == true) {
+if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
     header("Location: checkpoint.php");
 }
 if (isset($_POST["submit"])) {
@@ -47,22 +47,13 @@ if (isset($_POST["submit"])) {
         $mail->MsgHTML($message);
         $mail->AltBody = "One Time Password Is:" . $otp;
         if (!$mail->send()) {
-            $smtpError = "<div class='alert alert-danger' role='alert'>
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-          <span aria-hidden='true'>&times;</span>
-        </button>
-        <strong>Our Bad!</strong> Unable to send email please try again.
-      </div>";
+            $Error = "<strong>Our Bad!</strong> Unable to send email please try again.";
         } else {
             header("Location: checkpoint.php");
         }
     } else {
-        $emailError = "<div class='alert alert-danger' role='alert'>
-    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button>
-    <strong>Wait!</strong> Account already exist. Try Login.
-  </div>";
+        $Error = "
+    <strong>Wait!</strong> Account already exist. Try Login.";
     }
 }
 ?>
@@ -96,14 +87,14 @@ if (isset($_POST["submit"])) {
      <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
      <meta name="author" content="ThemePixels">
 
-     <title>Login - AGREM.</title>
+     <title>Register - AGRIM.</title>
 
      <!-- Vendor css -->
-     <link href="./lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-     <link href="./lib/Ionicons/css/ionicons.css" rel="stylesheet">
+     <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+     <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
 
      <!-- Slim CSS -->
-     <link rel="stylesheet" href="./css/slim.css">
+     <link rel="stylesheet" href="../assets/css/slim.css">
 
    </head>
    <body>
@@ -116,12 +107,15 @@ if (isset($_POST["submit"])) {
            <form method="post" action="register.php">
            <div class="form-group">
               <?php
-              error_reporting(0);
-              echo $emailError;
+              if(!empty($Error)):
+                echo "<div class='alert alert-danger' role='alert'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+              <span aria-hidden='true'>&times;</span>
+            </button>" . $Error . "</div>";
+              endif;
               ?>
-             <?php echo $smtpError; ?>
              <input type="text" name="email" class="form-control" placeholder="Enter Your Email">
-             <p class="mg-b-0 text-right">or register via <a href="./authsms.php">Phone Number</a></p>
+             <p class="mg-b-0 text-right">or register via <a href="./smsregister.php">Phone Number</a></p>
            </div><!-- form-group -->
            <input type="submit" class="btn btn-primary btn-block btn-signin" name="submit" value="Send OTP">
          </form>
@@ -144,46 +138,12 @@ if (isset($_POST["submit"])) {
        </div><!-- signin-left -->
      </div><!-- d-flex -->
 
-     <script src="./lib/jquery/js/jquery.js"></script>
-     <script src="./lib/popper.js/js/popper.js"></script>
-     <script src="./lib/bootstrap/js/bootstrap.js"></script>
+     <script src="../lib/jquery/js/jquery.js"></script>
+     <script src="../lib/popper.js/js/popper.js"></script>
+     <script src="../lib/bootstrap/js/bootstrap.js"></script>
 
-     <script src="./js/slim.js"></script>
-     <script>
-       $(function(){
-         'use strict'
+     <script src="../assets/js/slim.js"></script>
 
-         $('.form-layout .form-control').on('focusin', function(){
-           $(this).closest('.form-group').addClass('form-group-active');
-         });
-
-         $('.form-layout .form-control').on('focusout', function(){
-           $(this).closest('.form-group').removeClass('form-group-active');
-         });
-
-         // Select2
-         $('.select2').select2({
-           minimumResultsForSearch: Infinity
-         });
-
-         $('#select2-a, #select2-b').select2({
-           minimumResultsForSearch: Infinity
-         });
-
-         $('#select2-a').on('select2:opening', function (e) {
-           $(this).closest('.form-group').addClass('form-group-active');
-         });
-
-         $('#select2-a').on('select2:closing', function (e) {
-           $(this).closest('.form-group').removeClass('form-group-active');
-         });
-
-       });
-       $(document).ready(function(){
-           $("#myModal").modal('show');
-       });
-
-     </script>
 
    </body>
  </html>

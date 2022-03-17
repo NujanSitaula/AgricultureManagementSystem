@@ -11,7 +11,7 @@ if($count == 1){
 
 }
 else{
-  echo "Unable to find auth";
+  header("Location: logout.php");
 }
 echo $authToken;
 
