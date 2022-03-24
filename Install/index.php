@@ -47,7 +47,7 @@
 
         <h2 class="slim-logo"><a href="index.html">Agrim<span>.</span></a></h2>
         <h3 class="signin-title-primary">Install Agrim</h3>
-        <h5 class="signin-title-secondary lh-4">It's simply easy to install agrim and only takes a minute.</h5>
+        <h5 class="signin-title-secondary lh-4">It's easy to install and only takes a minute.</h5>
         <div class="row row-xs mg-b-10">
           <div class="col-sm"><input type="text" class="form-control" placeholder="Host Name eg: localhost"></div>
           <div class="col-sm mg-t-10 mg-sm-t-0"><input type="text" class="form-control" placeholder="Database Name"></div>

@@ -25,7 +25,7 @@ if (isset($_SESSION["EMAIL"])) { ?>
    		$authToken = bin2hex($authToken);
          mysqli_query($con, "UPDATE ams_users SET OTP='', authToken='$authToken' WHERE Email='$email'");
          $_SESSION["IS_LOGIN"] = $authToken;
-         header("Location: loggedin.php");
+         header("Location: ./moredetails.php");
          unset($_SESSION["EMAIL"]);
      } else {
          $Error = "<strong>You Missed It!</strong> Please enter a valid OTP.";

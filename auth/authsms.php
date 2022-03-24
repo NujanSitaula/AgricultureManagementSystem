@@ -20,7 +20,7 @@
     	$otp=rand(11111,99999);
     	mysqli_query($con,"UPDATE ams_users SET OTP='$otp' WHERE Phone='$phone'");
 
-    	$_SESSION['EMAIL']=$phone;
+
 
       $args = http_build_query(array(
                   'auth_token'=> '1c2f4c96f4af3cd74a7c9bccf03a4cf6284cc18360dbbce2112f52e9de4446b6',
@@ -37,6 +37,8 @@
           // Response
           $response = curl_exec($ch);
           curl_close($ch);
+          
+          $_SESSION['EMAIL']=$phone;
 
           header("Location: smscheckpoint.php");
 

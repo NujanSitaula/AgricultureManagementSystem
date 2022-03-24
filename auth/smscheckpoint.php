@@ -27,7 +27,7 @@ if(isset($_SESSION['EMAIL'])){
 		$authToken = bin2hex($authToken);
   	mysqli_query($con,"UPDATE ams_users SET OTP='', authToken='$authToken' WHERE Phone='$phone'");
   	$_SESSION['IS_LOGIN']=$authToken;
-  	header("Location: loggedin.php");
+  	header("Location: ./moredetails.php");
   	unset($_SESSION['EMAIL']);
   }else{
     $phoneError = "<div class='alert alert-danger' role='alert'>

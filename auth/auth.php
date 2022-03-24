@@ -15,14 +15,12 @@ if (isset($_POST["submit"])) {
     $res = mysqli_query($con, "SELECT * FROM ams_users WHERE Email='$email'");
     $GreetName = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $count = mysqli_num_rows($res);
-    if ($count > 0) {
+    if ($count = 1) {
         $otp = rand(11111, 99999);
         mysqli_query(
             $con,
             "UPDATE ams_users SET OTP='$otp' WHERE Email='$email'"
         );
-
-        $_SESSION["EMAIL"] = $email;
 
         $mail = new PHPmailer();
 
@@ -49,6 +47,7 @@ if (isset($_POST["submit"])) {
             $Error = "<strong>Our Bad!</strong> Unable to send email please try again.";
         }
         else {
+            $_SESSION["EMAIL"] = $email;
             header("Location: checkpoint.php");
         }
     }
