@@ -95,9 +95,11 @@ else{
           <option value="province1">Province No. 1</option>
           <option value="province2">Madhesh Province</option>
           <option value="province3">Bagmati Province</option>
-          <option value="Prefer Not To Say">Gandaki Province</option>
-          <option value="Prefer Not To Say">Lumbini Province</option>
-          <option value="Prefer Not To Say">Karnali Province</option>
+          <option value="province4">Gandaki Province</option>
+          <option value="province5">Lumbini Province</option>
+          <option value="province6">Karnali Province</option>
+          <option value="province7">Sudurpashchim Province</option>
+
         </select><br>
         <select class="form-control select2-show-search" id="choose2" onchange="populateLocal(this.id, 'choose3')" name="district" data-placeholder="Select District" required>
           <option label="Select District"></option>
@@ -113,7 +115,7 @@ else{
  					<br><input type="text" required class="form-control" name="wad" placeholder="Wad No.">
  				</div>
         <div class="col-sm">
-          <br><input type="text" class="form-control" name="country" placeholder="Country" value="Nepal" disabled>
+          <br><input type="text" class="form-control" name="country" placeholder="Country" value="Nepal" readonly="readonly">
         </div>
  			</div>
 

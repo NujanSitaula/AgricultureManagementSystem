@@ -37,7 +37,7 @@
           // Response
           $response = curl_exec($ch);
           curl_close($ch);
-          
+
           $_SESSION['EMAIL']=$phone;
 
           header("Location: smscheckpoint.php");
@@ -123,7 +123,7 @@
                </div><!-- form-group -->
                <input type="submit" class="btn btn-primary btn-block btn-signin" name="submit" value="Send OTP">
              </form>
-               <p class="mg-b-0">Don't have an account? <a href="./auth.php">Register Now</a></p>
+               <p class="mg-b-0">Don't have an account? <a href="./smsregister.php">Register Now</a></p>
              </div>
 
            </div><!-- signin-right -->

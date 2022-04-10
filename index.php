@@ -13,6 +13,7 @@ if (!$con) {
  header("Location: ./Install/");
 }
 else{
+
 session_start();
 
 if(isset($_SESSION['IS_LOGIN'])){

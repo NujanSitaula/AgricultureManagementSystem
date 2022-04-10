@@ -1,4 +1,5 @@
 <?php
+$isActive = 1;
 include('./header.php');
 //end of header
 ?>

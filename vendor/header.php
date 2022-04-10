@@ -4,6 +4,7 @@ require "../config.php";
 
 session_start();
 
+
 if(isset($_SESSION['IS_LOGIN'])){
   $authToken = $_SESSION['IS_LOGIN'];
 $sql = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$authToken'");
@@ -11,6 +12,9 @@ $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
 if($countUser['Name'] == '' || $countUser['dateBirth'] == ''){
   header("Location: ../auth/moredetails.php");
+}
+if($countUser['Environment'] == 'user'){
+  header("Location: ../dashboard.php");
 }
 }
 else{
@@ -52,6 +56,7 @@ else{
     <!-- vendor css -->
     <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="../lib/datatables/css/jquery.dataTables.css" rel="stylesheet">
     <link href="../lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
 
     <!-- Slim CSS -->
@@ -62,7 +67,7 @@ else{
     <div class="slim-header">
       <div class="container">
         <div class="slim-header-left">
-          <h2 class="slim-logo"><a href="index.html">Agrim<span>.</span></a></h2>
+          <h2 class="slim-logo"><a href="index.php">Agrim<span>.</span></a></h2>
         </div><!-- slim-header-left -->
         <div class="slim-header-right">
           <div class="dropdown dropdown-a">
@@ -119,7 +124,7 @@ else{
                 <a href="page-edit-profile.html" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>
                 <a href="page-activity.html" class="nav-link"><i class="icon ion-ios-bolt"></i> Activity Log</a>
                 <a href="page-settings.html" class="nav-link"><i class="icon ion-ios-gear"></i> Account Settings</a>
-                <a href="page-signin.html" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
+                <a href="../auth/logout.php" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
               </nav>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
@@ -129,70 +134,29 @@ else{
     <div class="slim-navbar">
       <div class="container">
         <ul class="nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
+          <li class="nav-item <?php if($isActive == 1){echo "active";}  ?>">
+            <a class="nav-link" href="./index.php">
               <i class="icon ion-ios-home-outline"></i>
               <span>Dashboard</span>
             </a>
           </li>
-          <li class="nav-item with-sub">
+          <li class="nav-item with-sub <?php if($isActive == 2){echo "active";}  ?>">
             <a class="nav-link" href="#">
               <i class="icon ion-ios-nutrition-outline"></i>
               <span>Crops</span>
             </a>
             <div class="sub-item">
               <ul>
-                <li><a href="form-elements.html">List Crops</a></li>
-                <li><a href="form-layouts.html">Add Crops</a></li>
+                <li><a href="./viewcrops.php">List Crops</a></li>
+                <li><a href="./addcrops.php">Add Crops</a></li>
               </ul>
             </div><!-- dropdown-menu -->
           </li>
-          <li class="nav-item with-sub">
-            <a class="nav-link" href="#">
-              <i class="icon ion-ios-book-outline"></i>
-              <span>Pages</span>
+          <li class="nav-item <?php if($isActive == 3){echo "active";}  ?>">
+            <a class="nav-link" href="./invoice.php">
+              <i class="icon ion-document-text"></i>
+              <span>Invoice</span>
             </a>
-            <div class="sub-item">
-              <ul>
-                <li><a href="page-profile.html">Profile Page</a></li>
-                <li><a href="page-invoice.html">Invoice</a></li>
-                <li><a href="page-contact.html">Contact Manager</a></li>
-                <li><a href="page-file-manager.html">File Manager</a></li>
-                <li><a href="page-calendar.html">Calendar</a></li>
-                <li><a href="page-timeline.html">Timeline</a></li>
-                <li class="sub-with-sub">
-                  <a href="#">Pricing</a>
-                  <ul>
-                    <li><a href="page-pricing.html">Pricing 01</a></li>
-                    <li><a href="page-pricing2.html">Pricing 02</a></li>
-                    <li><a href="page-pricing3.html">Pricing 03</a></li>
-                  </ul>
-                </li>
-                <li class="sub-with-sub">
-                  <a href="page-signin.html">Sign In</a>
-                  <ul>
-                    <li><a href="page-signin.html">Signin Simple</a></li>
-                    <li><a href="page-signin2.html">Signin Split</a></li>
-                  </ul>
-                </li>
-                <li class="sub-with-sub">
-                  <a href="page-signup.html">Sign Up</a>
-                  <ul>
-                    <li><a href="page-signup.html">Signup Simple</a></li>
-                    <li><a href="page-signup2.html">Signup Split</a></li>
-                  </ul>
-                </li>
-                <li class="sub-with-sub">
-                  <a href="#">Error Pages</a>
-                  <ul>
-                    <li><a href="page-404.html">404 Not Found</a></li>
-                    <li><a href="page-505.html">505 Forbidden</a></li>
-                    <li><a href="page-500.html">500 Internal Server</a></li>
-                    <li><a href="page-503.html">503 Service Unavailable</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div><!-- dropdown-menu -->
           </li>
           <li class="nav-item with-sub">
             <a class="nav-link" href="#" data-toggle="dropdown">

@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
         $mail->Host = "smtp.mailgun.org"; // Specify mailgun SMTP servers
         $mail->SMTPAuth = true; // Enable SMTP authentication
         $mail->Username = "otp@amsystem.codes"; // SMTP username from https://mailgun.com/cp/domains
-        $mail->Password = "9455eea0c2e3dc8c433b38266abb55a4-1b237f8b-f5f3560b"; // SMTP password from https://mailgun.com/cp/domains
+        $mail->Password = "8a801b07a93c183f930b212b2f718fcf-0677517f-c4783eaa"; // SMTP password from https://mailgun.com/cp/domains
         $mail->SMTPSecure = "tls"; // Enable encryption, 'ssl'
         $mail->From = "otp@amsystem.codes"; // The FROM field, the address sending the email
         $mail->FromName = "AGRIM"; // The NAME field which will be displayed on arrival by the email client
@@ -119,7 +119,7 @@ if (isset($_POST["submit"])) {
            </div><!-- form-group -->
            <input type="submit" class="btn btn-primary btn-block btn-signin" name="submit" value="Send OTP">
          </form>
-           <p class="mg-b-0">Already have an account? <a href="./auth.php">Login Now</a></p>
+           <p class="mg-b-0">Already have an account? <a href="./authsms.php">Login Now</a></p>
          </div>
 
        </div><!-- signin-right -->

@@ -12,10 +12,10 @@ if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
 }
 if (isset($_POST["submit"])) {
     $email = $_POST["email"];
-    $res = mysqli_query($con, "SELECT * FROM ams_users WHERE Email='$email'");
+    $res = mysqli_query($con, "SELECT * FROM ams_users WHERE Email='$email'") or die($con -> error);
     $GreetName = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $count = mysqli_num_rows($res);
-    if ($count = 1) {
+    if ($count == 1) {
         $otp = rand(11111, 99999);
         mysqli_query(
             $con,
@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
         $mail->Host = "smtp.mailgun.org"; // Specify mailgun SMTP servers
         $mail->SMTPAuth = true; // Enable SMTP authentication
         $mail->Username = "otp@amsystem.codes"; // SMTP username from https://mailgun.com/cp/domains
-        $mail->Password = "9455eea0c2e3dc8c433b38266abb55a4-1b237f8b-f5f3560b"; // SMTP password from https://mailgun.com/cp/domains
+        $mail->Password = "8a801b07a93c183f930b212b2f718fcf-0677517f-c4783eaa"; // SMTP password from https://mailgun.com/cp/domains
         $mail->SMTPSecure = "tls"; // Enable encryption, 'ssl'
         $mail->From = "otp@amsystem.codes"; // The FROM field, the address sending the email
         $mail->FromName = "AGRIM"; // The NAME field which will be displayed on arrival by the email client
@@ -44,7 +44,7 @@ if (isset($_POST["submit"])) {
         $mail->MsgHTML($message);
         $mail->AltBody = "One Time Password Is:" . $otp;
         if (!$mail->send()) {
-            $Error = "<strong>Our Bad!</strong> Unable to send email please try again.";
+            $Error = "<strong>Our Bad!</strong> Unable to send email please try again. Error Code: SMTPFAILED";
         }
         else {
             $_SESSION["EMAIL"] = $email;

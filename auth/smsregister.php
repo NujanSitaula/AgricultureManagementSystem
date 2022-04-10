@@ -102,7 +102,6 @@
        <body>
          <div class="d-md-flex flex-row-reverse">
            <div class="signin-right">
-
              <div class="signin-box">
                <h2 class="signin-title-primary">Welcome to AGRIM!</h2>
                <h3 class="signin-title-secondary">Creating a account is easy.</h3>
@@ -121,7 +120,7 @@
                </div><!-- form-group -->
                <input type="submit" class="btn btn-primary btn-block btn-signin" name="submit" value="Send OTP">
              </form>
-               <p class="mg-b-0">Don't have an account? <a href="./auth.php">Register Now</a></p>
+               <p class="mg-b-0">Already have an account? <a href="./authsms.php">Login Now</a></p>
              </div>
 
            </div><!-- signin-right -->
