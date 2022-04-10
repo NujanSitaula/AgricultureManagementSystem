@@ -29,6 +29,11 @@ Built With:
 * CSS
 * BOOTSTRAP
 * MYSQL
+* PHP Mailer
+
+API Used:
+* AkashSMS (AkashSMS is used to send the OTP to the users while registering or logging in.)
+* MailGun (Mailgun is used to send email via Agrim. It uses mailgun SMTP for sending emails.)
 
 Disclaimer: This is a college project and is still under development. 
 
