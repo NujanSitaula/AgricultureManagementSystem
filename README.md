@@ -2,8 +2,9 @@
 AGRIM is Nepal's first eAgro platform, enabling farmers from all corners of the country to maximize the value of their crops. This platform establishes a link between farmers and customers. Our ultimate objective is to give both farmers and customers with a seamless selling/buying experience. 
 <div align="center">
   <a href="https://amsystem.codes">
-    <img src="https://i.ibb.co/QpmqcCx/Screenshot-133.png" alt="Logo" width="80" height="80">
+    <img src="https://i.ibb.co/QpmqcCx/Screenshot-133.png" alt="Logo">
   </a>
+  </div>
 Agrim For Farmers:
 * Farmers from different places can sell their crops at resonable price.
 * Farmers can view the current market price of the crops available on the market.
