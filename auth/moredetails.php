@@ -6,7 +6,7 @@ $checkUser = $_SESSION['IS_LOGIN'];
 $checkEmail = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$checkUser'");
 $countUser = mysqli_fetch_array($checkEmail, MYSQLI_ASSOC);
 $userEmail = $countUser['Email'];
-if($countUser['Name'] != '' || $countUser['dateBirth'] != ''){
+if(!empty($countUser['Name'])){
   header("Location: ./next.php");
 }
 if(isset($_POST[saveProfile])){

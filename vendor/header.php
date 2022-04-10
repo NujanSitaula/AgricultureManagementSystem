@@ -10,12 +10,13 @@ if(isset($_SESSION['IS_LOGIN'])){
 $sql = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$authToken'");
 $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
-if($countUser['Name'] == '' || $countUser['dateBirth'] == ''){
+if(empty($countUser['Name'])){
   header("Location: ../auth/moredetails.php");
 }
 if($countUser['Environment'] == 'user'){
   header("Location: ../dashboard.php");
 }
+
 }
 else{
   header("Location: ../auth/auth.php");

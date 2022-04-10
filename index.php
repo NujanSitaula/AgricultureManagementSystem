@@ -21,10 +21,10 @@ if(isset($_SESSION['IS_LOGIN'])){
 $sql = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$authToken'");
 $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
-if($countUser['Name'] == '' || $countUser['dateBirth'] == ''){
+if(empty($countUser['Name'])){
   header("Location: ./auth/moredetails.php");
 }
-elseif($countUser['Country'] == '' || $countUser['localAddress'] == ''){
+elseif(empty($countUser['localAddress'])){
   header("Location: ./auth/next.php");
 }
 elseif($countUser['Environment'] == 'admin'){

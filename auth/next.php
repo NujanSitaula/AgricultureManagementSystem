@@ -6,7 +6,12 @@ if(isset($_SESSION['IS_LOGIN'])){
 $sql = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$authToken'");
 $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
-if($countUser['Country'] == '' || $countUser['localAddress'] == ''){
+if(empty($countUser['Name'])){
+  header("Location: ./moredetails.php");
+}
+if(!empty($countUser['localAddress'])){
+header("Location: ../index.php");
+}
 
 if($count == 1){
   if(isset($_POST['completeReg'])){
@@ -146,10 +151,6 @@ else{
 </html>
 
 <?php
-}
-else{
-  header("Location: ../index.php");
-}
 }
 else{
   header("Location: ./auth.php");
