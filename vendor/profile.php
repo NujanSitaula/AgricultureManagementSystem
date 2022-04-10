@@ -121,15 +121,22 @@ require "./header.php";
        <div class="col-lg-4 mg-t-20 mg-lg-t-0">
          <div class="card card-connection">
            <div class="row row-xs">
-             <div class="col-4 tx-primary">129</div>
-             <div class="col-8">people viewed your profile in the past 90 days</div>
+             <?php
+             $getUserID = $countUser['id'];
+             $countQuery = mysqli_query($con, "SELECT * FROM ams_crops WHERE id = '$getUserID'");
+             $countApproved = mysqli_query($con, "SELECT * FROM ams_crops WHERE isApproved = 1 AND id = '$getUserID'");
+             $approvedCount = mysqli_num_rows($countApproved);
+             $countAllUser = mysqli_num_rows($countQuery);
+               ?>
+             <div class="col-4 tx-primary"><?php  echo $countAllUser; ?></div>
+             <div class="col-8">Crops has been added till date.</div>
            </div><!-- row -->
            <hr>
            <div class="row row-xs">
-             <div class="col-4 tx-purple">845</div>
+             <div class="col-4 tx-purple"><?php  echo $approvedCount; ?></div>
              <div class="col-8">
-               connections <br>
-               <a href="">Grow your network</a>
+               Approved Crops<br>
+               <a href="./viewcrops.php">View All Crops</a>
              </div>
            </div><!-- row -->
          </div><!-- card -->
@@ -138,27 +145,19 @@ require "./header.php";
          <div class="card pd-25 mg-t-20">
            <div class="slim-card-title">Contact &amp; Personal Info</div>
 
-           <div class="media-list mg-t-25">
-             <div class="media">
-               <div><i class="icon ion-link tx-24 lh-0"></i></div>
-               <div class="media-body mg-l-15 mg-t-4">
-                 <h6 class="tx-14 tx-gray-700">Websites</h6>
-                 <a href="" class="d-block">http://themepixels.me</a>
-                 <a href="" class="d-block">http://themeforest.net</a>
-               </div><!-- media-body -->
-             </div><!-- media -->
+           <div class="media-list">
              <div class="media mg-t-25">
                <div><i class="icon ion-ios-telephone-outline tx-24 lh-0"></i></div>
                <div class="media-body mg-l-15 mg-t-4">
                  <h6 class="tx-14 tx-gray-700">Phone Number</h6>
-                 <span class="d-block">+1 234 5678 910</span>
+                 <span class="d-block">+977 <?php echo $countUser['Phone'];  ?></span>
                </div><!-- media-body -->
              </div><!-- media -->
              <div class="media mg-t-25">
                <div><i class="icon ion-ios-email-outline tx-24 lh-0"></i></div>
                <div class="media-body mg-l-15 mg-t-4">
                  <h6 class="tx-14 tx-gray-700">Email Address</h6>
-                 <span class="d-block">yourname@sample.com</span>
+                 <span class="d-block"><?php echo $countUser['Email'];  ?></span>
                </div><!-- media-body -->
              </div><!-- media -->
              <div class="media mg-t-25">

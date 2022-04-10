@@ -120,10 +120,8 @@ else{
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <nav class="nav">
-                <a href="page-profile.html" class="nav-link"><i class="icon ion-person"></i> View Profile</a>
-                <a href="page-edit-profile.html" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>
-                <a href="page-activity.html" class="nav-link"><i class="icon ion-ios-bolt"></i> Activity Log</a>
-                <a href="page-settings.html" class="nav-link"><i class="icon ion-ios-gear"></i> Account Settings</a>
+                <a href="./profile.php" class="nav-link"><i class="icon ion-person"></i> View Profile</a>
+                <a href="./settings.php" class="nav-link"><i class="icon ion-ios-gear"></i> Account Settings</a>
                 <a href="../auth/logout.php" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
               </nav>
             </div><!-- dropdown-menu -->
