@@ -3,9 +3,9 @@ session_start();
 require "../config.php";
 if (isset($_SESSION["IS_LOGIN"])) {
     header("Location: loggedin.php");
+    exit();
 }
-if (isset($_SESSION["EMAIL"])) { ?>
-	<?php
+if (isset($_SESSION["EMAIL"])) {
  $Error = "<strong>Yey!</strong> OTP has been sent to your email.";
  $ErrorClass = "alert-success";
 
@@ -25,14 +25,15 @@ if (isset($_SESSION["EMAIL"])) { ?>
    		$authToken = bin2hex($authToken);
          mysqli_query($con, "UPDATE ams_users SET OTP='', authToken='$authToken' WHERE Email='$email'");
          $_SESSION["IS_LOGIN"] = $authToken;
-         header("Location: ./moredetails.php");
+         header("Location: ../index.php");
+         exit();
          unset($_SESSION["EMAIL"]);
      } else {
          $Error = "<strong>You Missed It!</strong> Please enter a valid OTP.";
     $ErrorClass = "alert-danger";
      }
  }
- } else {header("Location: index.php");}
+} else {header("Location: ./auth.php"); exit();}
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -106,7 +107,7 @@ if (isset($_SESSION["EMAIL"])) { ?>
 
 						<p>AGRIM is Nepal's first eAgro platform, enabling farmers from all corners of the country to maximize the value of their crops. This platform establishes a link between farmers and customers. Our ultimate objective is to give both farmers and customers with a seamless selling/buying experience. </p>
 
-						<p>Browse our site and see for yourself why you need Slim.</p>
+						<p>Browse our site and see for yourself why you need Agrim.</p>
 
 						<p><a href="" class="btn btn-outline-secondary pd-x-25">Learn More</a></p>
 

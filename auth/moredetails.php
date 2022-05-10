@@ -1,13 +1,15 @@
 <?php
 require "../config.php";
 session_start();
-error_reporting(0);
+//error_reporting(0);
+if(isset($_SESSION['IS_LOGIN'])){
 $checkUser = $_SESSION['IS_LOGIN'];
 $checkEmail = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$checkUser'");
 $countUser = mysqli_fetch_array($checkEmail, MYSQLI_ASSOC);
 $userEmail = $countUser['Email'];
 if(!empty($countUser['Name'])){
   header("Location: ./next.php");
+  exit();
 }
 if(isset($_POST[saveProfile])){
   $profileImage = time() . '_agrim_' . $_FILES['uploadImage']['name'];
@@ -25,6 +27,7 @@ if(isset($_POST[saveProfile])){
   $query = mysqli_query($con, "UPDATE ams_users SET Name = '$firstName', Surname = '$lastName', Gender = '$genderOption', dateBirth = '$dateofBirth' WHERE authToken = '$checkUser'") or die("Error!" . $con -> error);
   if(!$con -> error){
     header('Location: ./next.php');
+    exit();
   }
 
 }
@@ -91,7 +94,7 @@ if(isset($_POST[saveProfile])){
  						<div class="input-group-prepend">
  							<div class="input-group-text"> <i class="icon ion-calendar tx-16 lh-0 op-6"></i> </div>
  						</div>
- 						<input type="text" class="form-control fc-datepicker" name="dateofBirth" placeholder="DOB: MM/DD/YYYY"> </div>
+ 						<input type="text" class="form-control fc-datepicker" name="dateofBirth" required placeholder="DOB: MM/DD/YYYY"> </div>
  				</div>
  				<div class="col-sm mg-t-10 mg-sm-t-0">
  					<select class="form-control select2-show-search" name="genderOption" data-placeholder="Select Gender" required>
@@ -171,3 +174,7 @@ if(isset($_POST[saveProfile])){
 
   </body>
 </html>
+<?php  }else{
+  header("Location: ./auth.php");
+  exit();
+} ?>

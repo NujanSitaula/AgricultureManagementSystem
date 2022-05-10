@@ -3,10 +3,10 @@ session_start();
 require "../config.php";
 if(isset($_SESSION['IS_LOGIN'])){
 	header("Location: loggedin.php");
+	exit();
 }
 if(isset($_SESSION['EMAIL'])){
-	?>
-  <?php
+
  $phoneError = "<div class='alert alert-success' role='alert'>
    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
      <span aria-hidden='true'>&times;</span>
@@ -27,8 +27,9 @@ if(isset($_SESSION['EMAIL'])){
 		$authToken = bin2hex($authToken);
   	mysqli_query($con,"UPDATE ams_users SET OTP='', authToken='$authToken' WHERE Phone='$phone'");
   	$_SESSION['IS_LOGIN']=$authToken;
+		unset($_SESSION['EMAIL']);
   	header("Location: ./moredetails.php");
-  	unset($_SESSION['EMAIL']);
+		exit();
   }else{
     $phoneError = "<div class='alert alert-danger' role='alert'>
       <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -40,7 +41,8 @@ if(isset($_SESSION['EMAIL'])){
   }
   }
   else{
-  	header("Location: index.php");
+  	header("Location: ./index.php");
+		exit();
   }
   ?>
 	<!DOCTYPE html>

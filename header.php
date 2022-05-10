@@ -1,9 +1,8 @@
 <?php
 
-require "../config.php";
+require "./config.php";
 
 session_start();
-
 
 if(isset($_SESSION['IS_LOGIN'])){
   $authToken = $_SESSION['IS_LOGIN'];
@@ -11,15 +10,21 @@ $sql = mysqli_query($con, "SELECT * FROM ams_users WHERE authToken = '$authToken
 $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
 if(empty($countUser['Name'])){
-  header("Location: ../auth/moredetails.php");
-}
-if($countUser['Environment'] == 'user'){
-  header("Location: ../dashboard.php");
+  header("Location: ./auth/moredetails.php");
 }
 
 }
 else{
-  header("Location: ../auth/auth.php");
+  header("Location: ./auth/auth.php");
+}
+
+if(isset($_POST['save'])){
+
+$userid = $_POST['userid'];
+$cropsid = $_POST['cropsid'];
+
+$insertcart = mysqli_query($con, "INSERT INTO `ams_cart`(`cropID`, `id`) VALUES ('$cropsid','$userid')") or die($con -> error);
+
 }
 ?>
 
@@ -27,6 +32,9 @@ else{
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,13 +63,13 @@ else{
     <title>Slim Responsive Bootstrap 4 Admin Template</title>
 
     <!-- vendor css -->
-    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
-    <link href="../lib/datatables/css/jquery.dataTables.css" rel="stylesheet">
-    <link href="../lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
+    <link href="./lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="./lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="./lib/datatables/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="./lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
 
     <!-- Slim CSS -->
-    <link rel="stylesheet" href="../assets/css/slim.css">
+    <link rel="stylesheet" href="./assets/css/slim.css">
 
   </head>
   <body class="dashboard-5">
@@ -72,50 +80,47 @@ else{
         </div><!-- slim-header-left -->
         <div class="slim-header-right">
           <div class="dropdown dropdown-a">
-            <a href="" class="header-notification" data-toggle="dropdown">
-              <i class="icon ion-ios-bolt-outline"></i>
+            <a href="" class="header-notification cart"  data-toggle="dropdown">
+              <i class="icon ion-ios-cart-outline"></i> <!-- <span class="badge badge-primary" style="font-size: 10px; margin-left: 5px;">0</span> !-->
             </a>
             <div class="dropdown-menu">
               <div class="dropdown-menu-header">
-                <h6 class="dropdown-menu-title">Activity Logs</h6>
-                <div>
-                  <a href="">Filter List</a>
-                  <a href="">Settings</a>
-                </div>
+                <h6 class="dropdown-menu-title">Quick Cart</h6>
               </div><!-- dropdown-menu-header -->
               <div class="dropdown-activity-list">
-                <div class="activity-label">Today, December 13, 2017</div>
+                <?php
+                $checkUserID = $countUser['id'];
+                $cartQuery = "SELECT ams_cart.id, ams_cart.cropID, ams_crops.cropsName, ams_crops.cropsPhoto, ams_crops.farmersRate FROM ams_cart INNER JOIN ams_crops ON ams_cart.cropID = ams_crops.cropsID";
+                $getcartItems = mysqli_query($con, $cartQuery);
+                 while($cartItems = mysqli_fetch_array($getcartItems, MYSQLI_ASSOC)){
+                   ?>
                 <div class="activity-item">
                   <div class="row no-gutters">
-                    <div class="col-2 tx-right">10:15am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Purchased christmas sale cloud storage</div>
+                    <div class="col-2 tx-right"><image src='./assets/uploads/<?php echo $cartItems['cropsPhoto'];  ?>' class='img-fluid img-thumbnail'> </div>
+                    <div class="col-8" style="padding-left: 10px;"><strong><?php echo $cartItems['cropsName'];  ?></strong></div>
+                    <div class="col-2"><button class='btn btn-danger btn-sm rounded-0' type='button' data-toggle='tooltip' data-placement='top' title='Delete'><i class='fa fa-trash'></i></button></div>
                   </div><!-- row -->
                 </div><!-- activity-item -->
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">3:21am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">1 item sold <strong>Christmas bundle</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-label">Yesterday, December 12, 2017</div>
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">6:57am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Earn new badge <strong>Elite Author</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
+              <?php  } ?>
               </div><!-- dropdown-activity-list -->
-              <div class="dropdown-list-footer">
-                <a href="page-activity.html"><i class="fa fa-angle-down"></i> Show All Activities</a>
+                <div class="activity-item">
+                  <div class="row no-gutters">
+                    <h5>Total Amount: </h5><?php
+                    $allsum = mysqli_query($con, "SELECT SUM(ams_crops.farmersRate) FROM ams_cart INNER JOIN ams_crops ON ams_cart.cropID = ams_crops.cropsID");
+                    $sum = mysqli_fetch_array($allsum, MYSQLI_ASSOC);
+                    echo "<strong>" . $sum['SUM(ams_crops.farmersRate)'] . "</strong>";
+
+                     ?>
+                  </div>
+                  </div>
+              <div class="dropdown-list-footer btn-primary">
+                <a href="page-activity.html" style="color: #fff;">CHECKOUT</a>
               </div>
             </div><!-- dropdown-menu-right -->
           </div><!-- dropdown -->
           <div class="dropdown dropdown-c">
             <a href="#" class="logged-user" data-toggle="dropdown">
-              <img src="../assets/uploads/<?php echo $countUser['dprofile']; ?>" alt="Profile Photo Nujan">
+              <img src="./assets/uploads/<?php echo $countUser['dprofile']; ?>" alt="Profile Photo Nujan">
               <span><?php echo $countUser['Name'] . " " . $countUser['Surname']; ?></span>
               <i class="fa fa-angle-down"></i>
             </a>
@@ -158,22 +163,16 @@ else{
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="dropdown">
-              <i class="icon ion-ios-gear-outline"></i>
-              <span>Transaction</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="page-messages.html">
               <i class="icon ion-ios-chatboxes-outline"></i>
-              <span>Market Price</span>
+              <span>Messages</span>
               <span class="square-8"></span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="widgets.html">
               <i class="icon ion-ios-analytics-outline"></i>
-              <span>Recommendation</span>
+              <span>Apply For Farmer</span>
             </a>
           </li>
         </ul>

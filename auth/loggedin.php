@@ -12,6 +12,7 @@ if($count == 1){
 }
 else{
   header("Location: logout.php");
+  exit();
 }
 echo $authToken;
 
@@ -23,6 +24,7 @@ echo $GreetName['Name'];
 }
 else{
   header("Location: index.php");
+  exit();
 }
 
  ?>

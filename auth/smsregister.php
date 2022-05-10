@@ -7,8 +7,13 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
     session_start();
-    if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
-        header("Location: smscheckpoint.php");
+    if (isset($_SESSION["EMAIL"]) == true) {
+        header("Location: ./smscheckpoint.php");
+        exit();
+    }
+    if (isset($_SESSION["IS_LOGIN"]) == true) {
+        header("Location: ../index.php");
+        exit();
     }
     if(isset($_POST['submit']))
         {
@@ -38,7 +43,9 @@
           $response = curl_exec($ch);
           curl_close($ch);
 
-          header("Location: smscheckpoint.php");
+          header("Location: ./smscheckpoint.php");
+          exit();
+          
 
 
     }else{

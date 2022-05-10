@@ -10,6 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 session_start();
 if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
     header("Location: checkpoint.php");
+    exit();
 }
 if (isset($_POST["submit"])) {
     $email = $_POST["email"];
@@ -50,6 +51,7 @@ if (isset($_POST["submit"])) {
             $Error = "<strong>Our Bad!</strong> Unable to send email please try again.";
         } else {
             header("Location: checkpoint.php");
+            exit();
         }
     } else {
         $Error = "

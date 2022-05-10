@@ -7,8 +7,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 session_start();
-if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
-    header("Location: checkpoint.php");
+if (isset($_SESSION["EMAIL"]) == true) {
+    header("Location: ./checkpoint.php");
+    exit();
+}
+if (isset($_SESSION["IS_LOGIN"]) == true){
+   header("Location: ../index.php");
+   exit();
 }
 if (isset($_POST["submit"])) {
     $email = $_POST["email"];
@@ -49,6 +54,7 @@ if (isset($_POST["submit"])) {
         else {
             $_SESSION["EMAIL"] = $email;
             header("Location: checkpoint.php");
+            exit();
         }
     }
     else {
@@ -130,7 +136,7 @@ if (isset($_POST["submit"])) {
 
            <p>AGRIM is Nepal's first eAgro platform, enabling farmers from all corners of the country to maximize the value of their crops. This platform establishes a link between farmers and customers. Our ultimate objective is to give both farmers and customers with a seamless selling/buying experience. </p>
 
-           <p>Browse our site and see for yourself why you need Slim.</p>
+           <p>Browse our site and see for yourself why you need Agrim.</p>
 
            <p><a href="" class="btn btn-outline-secondary pd-x-25">Learn More</a></p>
 

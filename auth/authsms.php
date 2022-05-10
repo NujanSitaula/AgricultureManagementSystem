@@ -9,6 +9,7 @@
     session_start();
     if (isset($_SESSION["EMAIL"]) == true || isset($_SESSION["IS_LOGIN"]) == true) {
         header("Location: checkpoint.php");
+        exit();
     }
     if(isset($_POST['submit']))
         {
@@ -41,6 +42,7 @@
           $_SESSION['EMAIL']=$phone;
 
           header("Location: smscheckpoint.php");
+          exit();
 
 
     }else{

@@ -8,9 +8,11 @@ $countUser= mysqli_fetch_array($sql, MYSQLI_ASSOC);
 $count=mysqli_num_rows($sql);
 if(empty($countUser['Name'])){
   header("Location: ./moredetails.php");
+  exit();
 }
 if(!empty($countUser['localAddress'])){
 header("Location: ../index.php");
+exit();
 }
 
 if($count == 1){
@@ -25,11 +27,13 @@ if($count == 1){
   $query = mysqli_query($con, "UPDATE ams_users SET localAddress = '$localAddress', Country = '$countryAddress', provinceAddress = '$provinceAddress', wadAddress = '$wadAddress', districtAddress = '$districtAddress', familyMember = '$numberFamily' WHERE authToken = '$authToken'") or die("Error!" . $con -> error);
   if(!$con -> error){
     header('Location: ../index.php');
+    exit();
     }
   }
 }
 else{
   header("Location: logout.php");
+  exit();
 }
  ?>
  <!DOCTYPE html>
@@ -154,6 +158,7 @@ else{
 }
 else{
   header("Location: ./auth.php");
+  exit();
 }
 
  ?>

@@ -18,10 +18,9 @@ $getTestData = mysqli_num_rows($result);
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data Tables</li>
+        <li class="breadcrumb-item active" aria-current="page">List Invoice</li>
       </ol>
-      <h6 class="slim-pagetitle">Data Tables</h6>
+      <h6 class="slim-pagetitle">View Invoice</h6>
     </div><!-- slim-pageheader -->
     <?php if(!empty($success)):
     echo "<div class='alert alert-solid alert-success' role='alert'>
@@ -32,8 +31,8 @@ $getTestData = mysqli_num_rows($result);
      </div>";
    endif;?>
     <div class="section-wrapper">
-      <label class="section-title">View Crops</label>
-      <p class="mg-b-20 mg-sm-b-40">View history of total crops you've added.</p>
+      <label class="section-title">View Invoice</label>
+      <p class="mg-b-20 mg-sm-b-40">View history of total total invoices.</p>
 
       <div class="table-wrapper">
         <table id="datatable1" class="table display responsive nowrap">
