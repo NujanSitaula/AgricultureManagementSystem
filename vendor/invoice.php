@@ -5,8 +5,9 @@ require "./header.php";
 $userIDinvoice = $countUser['id'];
 // echo $userIDinvoice;
 $getInvoice = "SELECT * FROM `ams_allinvoice` WHERE id = '$userIDinvoice'";
-$result = mysqli_query($con, $getInvoice) or die($con -> error);
-$getTestData = mysqli_num_rows($result);
+$result = mysqli_query($con, $getInvoice);
+
+// // $getTestData = mysqli_num_rows($result);
 // while($getAllInvoice = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 //   echo $getAllInvoice['id'];
 //
@@ -46,10 +47,13 @@ $getTestData = mysqli_num_rows($result);
           <tbody>
             <?php
              while($crops = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
                $newUserId = $crops['cropsID'];
+
                $listCrops = "SELECT * FROM `ams_crops` WHERE cropsID = '$newUserId'";
                $runQuery = mysqli_query($con, $listCrops);
                while($listAllCrops = mysqli_fetch_array($runQuery, MYSQLI_ASSOC)){
+
               echo "<tr><td>AG" . $crops['invoiceID'] . "</td><td>" . $crops['dateCreated'] . " KG </td><td>रू " . $listAllCrops['totalAmount'] . " </td><td>"; if($crops['isPaid'] == 0)
               {echo "<span class='tx-danger'>Unpaid<span>";} else{echo "<span class='tx-success'>Paid<span>";}
               echo " </td><td><ul class='list-inline m-0'>
