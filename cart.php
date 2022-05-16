@@ -19,6 +19,6 @@ echo"<div class='activity-item'>
 </div><!-- activity-item -->";
 } }
 else{
-  echo "Nujan";
+  echo "Error Occured";
 }
 ?>
