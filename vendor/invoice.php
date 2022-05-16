@@ -17,8 +17,6 @@ $getTestData = mysqli_num_rows($result);
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List Invoice</li>
       </ol>
       <h6 class="slim-pagetitle">View Invoice</h6>
     </div><!-- slim-pageheader -->
@@ -52,8 +50,6 @@ $getTestData = mysqli_num_rows($result);
                $listCrops = "SELECT * FROM `ams_crops` WHERE cropsID = '$newUserId'";
                $runQuery = mysqli_query($con, $listCrops);
                while($listAllCrops = mysqli_fetch_array($runQuery, MYSQLI_ASSOC)){
-
-
               echo "<tr><td>AG" . $crops['invoiceID'] . "</td><td>" . $crops['dateCreated'] . " KG </td><td>रू " . $listAllCrops['totalAmount'] . " </td><td>"; if($crops['isPaid'] == 0)
               {echo "<span class='tx-danger'>Unpaid<span>";} else{echo "<span class='tx-success'>Paid<span>";}
               echo " </td><td><ul class='list-inline m-0'>
@@ -76,8 +72,6 @@ $getTestData = mysqli_num_rows($result);
 
 <div class="slim-footer">
   <div class="container">
-    <p>Copyright 2018 &copy; All Rights Reserved. Slim Dashboard Template</p>
-    <p>Designed by: <a href="">ThemePixels</a></p>
   </div><!-- container -->
 </div><!-- slim-footer -->
 

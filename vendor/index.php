@@ -12,7 +12,13 @@ include('./header.php');
           </div>
           <div class="d-h-t-right">
             <div class="summary-item">
-              <h1>रू1,433</h1>
+              <h1>रू<?php
+              $userID = $countUser['id'];
+              $allsum = mysqli_query($con, "SELECT SUM(totalAmount), isApproved, id FROM `ams_crops` WHERE isApproved = 1 AND id = '$userID' AND dateAdded > now() - INTERVAL 30 day");
+              $sum = mysqli_fetch_array($allsum, MYSQLI_ASSOC);
+              echo "<strong>" . number_format(round($sum['SUM(totalAmount)'], 2)) . "</strong>";
+
+               ?></h1>
               <span>Earnings<br>for today</span>
             </div>
             <div class="summary-item">
@@ -25,20 +31,21 @@ include('./header.php');
         <div class="nav-statistics-wrapper">
           <nav class="nav">
             <a href="" class="nav-link active">Overview</a>
-            <a href="" class="nav-link">Employee</a>
-            <a href="" class="nav-link">Products</a>
-            <a href="" class="nav-link">Misc</a>
           </nav>
           <nav class="nav">
-            <a href="" class="nav-link">Today</a>
-            <a href="" class="nav-link active">This Week</a>
-            <a href="" class="nav-link">This Month</a>
+            <a href="" class="nav-link">This Year</a>
           </nav>
         </div><!-- nav-statistics-wrapper -->
 
         <div class="row row-statistics mg-b-30">
           <div class="col-md-5">
-            <h1 class="tx-inverse tx-56 tx-lato tx-bold">रू34,100</h1>
+            <h1 class="tx-inverse tx-56 tx-lato tx-bold">रू<?php
+            $userID = $countUser['id'];
+            $allsum = mysqli_query($con, "SELECT SUM(totalAmount), isApproved, id FROM `ams_crops` WHERE isApproved = 1 AND id = '$userID' AND dateAdded > now() - INTERVAL 30 day");
+            $sum = mysqli_fetch_array($allsum, MYSQLI_ASSOC);
+            echo "<strong>" . number_format(round($sum['SUM(totalAmount)'], 2)) . "</strong>";
+
+             ?></h1>
             <h6 class="tx-15 tx-inverse tx-bold mg-b-20">Total Earning (30 days)</h6>
             <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem</p>
             <p class="tx-12">
@@ -55,12 +62,7 @@ include('./header.php');
 
         <div class="report-summary-header">
           <div>
-            <h4 class="tx-inverse mg-b-3">Overall Report Summary</h4>
             <p class="mg-b-0"><i class="icon ion-calendar mg-r-3"></i> January 01, 2018 - January 31, 2018</p>
-          </div>
-          <div>
-            <a href="" class="btn btn-secondary"><i class="icon ion-ios-clock-outline tx-22"></i> Activity Logs</a>
-            <a href="" class="btn btn-secondary"><i class="icon ion-ios-gear-outline tx-24"></i> Edit Settings</a>
           </div>
         </div><!-- d-flex -->
 
@@ -168,74 +170,6 @@ include('./header.php');
             </div><!-- card -->
           </div><!-- col-4 -->
         </div><!-- row -->
-
-        <hr>
-
-        <div class="report-summary-header">
-          <div>
-            <h4 class="tx-inverse mg-b-3">Most Popular Products</h4>
-            <p class="mg-b-0"><i class="icon ion-calendar mg-r-3"></i> January 01, 2018 - January 31, 2018</p>
-          </div>
-          <div>
-            <a href="" class="btn btn-secondary">Top Rated Products</a>
-            <a href="" class="btn btn-secondary">View All Products</a>
-          </div>
-        </div><!-- d-flex -->
-
-        <div class="row row-sm">
-          <div class="col-md-6 col-lg-4">
-            <div class="card card-popular-product">
-              <label class="prod-id">Product ID: #PD-1754</label>
-              <h5 class="prod-name"><a href="">US 360 Home Security IP Camera Night</a></h5>
-              <p class="prod-by">By: <a href="">ThmPxls Security</a></p>
-              <div class="row">
-                <div class="col-5">
-                  <h1>1885</h1>
-                  <p>Total Sales</p>
-                </div><!-- col -->
-                <div class="col-7">
-                  <h1>$12,056</h1>
-                  <p>Earnings</p>
-                </div><!-- col -->
-              </div><!-- row -->
-            </div><!-- card -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-lg-4 mg-t-20 mg-md-t-0">
-            <div class="card card-popular-product">
-              <label class="prod-id">Product ID: #PD-1753</label>
-              <h5 class="prod-name"><a href="">US KS-5 Junior Lite DVD Karaoke 9500</a></h5>
-              <p class="prod-by">By: <a href="">ThmPxls Security</a></p>
-              <div class="row">
-                <div class="col-5">
-                  <h1>1862</h1>
-                  <p>Total Sales</p>
-                </div><!-- col -->
-                <div class="col-7">
-                  <h1>$13,113</h1>
-                  <p>Earnings</p>
-                </div><!-- col -->
-              </div><!-- row -->
-            </div><!-- card -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-lg-4 mg-t-20 mg-lg-t-0">
-            <div class="card card-popular-product">
-              <label class="prod-id">Product ID: #PD-1754</label>
-              <h5 class="prod-name"><a href="">US 360 Home Security IP Camera Night</a></h5>
-              <p class="prod-by">By: <a href="">ThmPxls Digital</a></p>
-              <div class="row">
-                <div class="col-5">
-                  <h1>1799</h1>
-                  <p>Total Sales</p>
-                </div><!-- col -->
-                <div class="col-7">
-                  <h1>$11,091</h1>
-                  <p>Earnings</p>
-                </div><!-- col -->
-              </div><!-- row -->
-            </div><!-- card -->
-          </div><!-- col-4 -->
-        </div><!-- row -->
-
       </div><!-- container -->
     </div><!-- slim-mainpanel -->
 
@@ -299,10 +233,10 @@ include('./header.php');
         var myChart1 = new Chart(ctx1, {
           type: 'bar',
           data: {
-            labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-              label: 'No of Sales',
-              data: [12, 129, 50, 110, 125, 18, 112],
+              label: 'Total Income',
+              data: [250, 129, 520, 1120, 1225, 1822, 1122, 1222, 1244, 4222, 1222, 2221],
               backgroundColor: '#27AAC8'
             }]
           },
@@ -319,7 +253,7 @@ include('./header.php');
                 ticks: {
                   beginAtZero:true,
                   fontSize: 10,
-                  max: 200
+                  max: 5000
                 }
               }],
               xAxes: [{

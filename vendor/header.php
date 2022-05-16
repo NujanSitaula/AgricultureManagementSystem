@@ -30,29 +30,11 @@ else{
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Agrim - Complete Solution For Farmers">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/slim/img/slim-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/slim">
-    <meta property="og:title" content="Agrim - Complete Solution For Farmers">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/slim/img/slim-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/slim/img/slim-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
-
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="Team Agrim">
 
-    <title>Slim Responsive Bootstrap 4 Admin Template</title>
+    <title>Welcome <?php echo $countUser['Name']; ?> - Agrim</title>
 
     <!-- vendor css -->
     <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -71,48 +53,6 @@ else{
           <h2 class="slim-logo"><a href="index.php">Agrim<span>.</span></a></h2>
         </div><!-- slim-header-left -->
         <div class="slim-header-right">
-          <div class="dropdown dropdown-a">
-            <a href="" class="header-notification" data-toggle="dropdown">
-              <i class="icon ion-ios-bolt-outline"></i>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-menu-header">
-                <h6 class="dropdown-menu-title">Activity Logs</h6>
-                <div>
-                  <a href="">Filter List</a>
-                  <a href="">Settings</a>
-                </div>
-              </div><!-- dropdown-menu-header -->
-              <div class="dropdown-activity-list">
-                <div class="activity-label">Today, December 13, 2017</div>
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">10:15am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Purchased christmas sale cloud storage</div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">3:21am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">1 item sold <strong>Christmas bundle</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-                <div class="activity-label">Yesterday, December 12, 2017</div>
-                <div class="activity-item">
-                  <div class="row no-gutters">
-                    <div class="col-2 tx-right">6:57am</div>
-                    <div class="col-2 tx-center"><span class="square-10 bg-success"></span></div>
-                    <div class="col-8">Earn new badge <strong>Elite Author</strong></div>
-                  </div><!-- row -->
-                </div><!-- activity-item -->
-              </div><!-- dropdown-activity-list -->
-              <div class="dropdown-list-footer">
-                <a href="page-activity.html"><i class="fa fa-angle-down"></i> Show All Activities</a>
-              </div>
-            </div><!-- dropdown-menu-right -->
-          </div><!-- dropdown -->
           <div class="dropdown dropdown-c">
             <a href="#" class="logged-user" data-toggle="dropdown">
               <img src="../assets/uploads/<?php echo $countUser['dprofile']; ?>" alt="Profile Photo Nujan">
@@ -122,7 +62,6 @@ else{
             <div class="dropdown-menu dropdown-menu-right">
               <nav class="nav">
                 <a href="./profile.php" class="nav-link"><i class="icon ion-person"></i> View Profile</a>
-                <a href="./settings.php" class="nav-link"><i class="icon ion-ios-gear"></i> Account Settings</a>
                 <a href="../auth/logout.php" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
               </nav>
             </div><!-- dropdown-menu -->
@@ -157,23 +96,17 @@ else{
               <span>Invoice</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="dropdown">
+          <li class="nav-item  <?php if($isActive == 4){echo "active";}  ?>">
+            <a class="nav-link" href="./transaction.php" data-toggle="dropdown">
               <i class="icon ion-ios-gear-outline"></i>
               <span>Transaction</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="page-messages.html">
+          <li class="nav-item <?php if($isActive == 5){echo "active";}  ?>">
+            <a class="nav-link" href="market.php">
               <i class="icon ion-ios-chatboxes-outline"></i>
               <span>Market Price</span>
               <span class="square-8"></span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="widgets.html">
-              <i class="icon ion-ios-analytics-outline"></i>
-              <span>Recommendation</span>
             </a>
           </li>
         </ul>

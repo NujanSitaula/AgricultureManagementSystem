@@ -41,9 +41,6 @@ if(isset($_POST['editCrops'])){
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data Tables</li>
       </ol>
       <h6 class="slim-pagetitle">Data Tables</h6>
     </div><!-- slim-pageheader -->
@@ -100,8 +97,6 @@ if(isset($_POST['editCrops'])){
 
 <div class="slim-footer">
   <div class="container">
-    <p>Copyright 2018 &copy; All Rights Reserved. Slim Dashboard Template</p>
-    <p>Designed by: <a href="">ThemePixels</a></p>
   </div><!-- container -->
 </div><!-- slim-footer -->
 

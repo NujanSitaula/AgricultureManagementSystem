@@ -1,14 +1,1 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "ams";
-
-// Create connection
-$con = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$con) {
- die("Connection failed: " . mysqli_connect_error());
-}
-?>
+<?php $servername="localhost"; $dbname="ams"; $username="root"; $password="root"; $con = mysqli_connect($servername, $username, $password, $dbname); if(!$con){header("Location: ../install/");}

@@ -1,18 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "ams";
-
-// Create connection
-$con = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$con) {
- header("Location: ./Install/");
-}
-else{
+require "./config.php";
 
 session_start();
 
@@ -31,7 +19,7 @@ elseif($countUser['Environment'] == 'admin'){
   header("Location: ./admin/");
 }
 elseif($countUser['Environment'] == 'vendor'){
-  header("Location: ./vendor/");
+  header("Location: ./dashboard.php");
 }
 elseif($countUser['Environment'] == 'user'){
   header("Location: ./dashboard.php");
@@ -43,6 +31,6 @@ else{
 else{
   header("Location: ./auth/auth.php");
 }
-}
+
 
 ?>

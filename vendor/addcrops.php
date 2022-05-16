@@ -21,11 +21,17 @@ if(isset($_POST["add"])){
     $query = "INSERT INTO `ams_crops`(`id`, `cropsName`, `quantity`, `cropsType`, `farmersRate`, `cropsDescription`, `cropsPhoto`, `totalAmount`) VALUES ('$user_id','$cropname','$quantity','$category','$rate','$desc','$profileImage', '$totalAmount')";
     mysqli_query($con, $query);
     $success = "<strong>Bravo!</strong> New crops has been successfully added and is under verification.";
+
+    $createInvoice = "INSERT INTO `ams_allinvoice`(`paymentOption`, `cropsID`, `id`, `invoiceNote`, `isPaid`) VALUES ('Khalti','11','$user_id','Nice Invoice','0')";
+    mysqli_query($con, $createInvoice) or die($con->error);
   }
   else{
     $query = "INSERT INTO `ams_crops`(`id`, `cropsName`, `quantity`, `cropsType`, `farmersRate`, `cropsDescription`) VALUES ('$user_id','$cropname','$quantity','$category','$rate','$desc')";
     mysqli_query($con, $query);
     $success = "<strong>Bravo!</strong> New crops has been successfully added and is under verification.";
+
+    $createInvoice = "INSERT INTO `ams_allinvoice`(`paymentOption`, `cropsID`, `id`, `invoiceNote`, `isPaid`) VALUES ('Khalti','11','$user_id','Nice Invoice','0')";
+    mysqli_query($con, $createInvoice) or die($con->error);;
   }
 
 
@@ -37,9 +43,6 @@ if(isset($_POST["add"])){
     <div class="container">
         <div class="slim-pageheader">
             <ol class="breadcrumb slim-breadcrumb">
-                <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="./viewcrops.php">Crops</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Crops</li>
             </ol>
             <h6 class="slim-pagetitle">Add Crops</h6>
         </div><!-- slim-pageheader -->
@@ -117,8 +120,6 @@ if(isset($_POST["add"])){
 </div>
 <div class="slim-footer">
   <div class="container">
-    <p>Copyright 2018 &copy; All Rights Reserved. Slim Dashboard Template</p>
-    <p>Designed by: <a href="">ThemePixels</a></p>
   </div><!-- container -->
 </div><!-- slim-footer -->
 <script src="../lib/jquery/js/jquery.js"></script>

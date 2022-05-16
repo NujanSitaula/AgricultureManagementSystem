@@ -11,7 +11,7 @@ if(!empty($countUser['Name'])){
   header("Location: ./next.php");
   exit();
 }
-if(isset($_POST[saveProfile])){
+if(isset($_POST['saveProfile'])){
   $profileImage = time() . '_agrim_' . $_FILES['uploadImage']['name'];
 
   $outcome = '../assets/uploads/' . $profileImage;
@@ -23,8 +23,12 @@ if(isset($_POST[saveProfile])){
   $lastName = $_POST['lastName'];
   $dateofBirth = $_POST['dateofBirth'];
   $genderOption = $_POST['genderOption'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+  
 
-  $query = mysqli_query($con, "UPDATE ams_users SET Name = '$firstName', Surname = '$lastName', Gender = '$genderOption', dateBirth = '$dateofBirth' WHERE authToken = '$checkUser'") or die("Error!" . $con -> error);
+
+  $query = mysqli_query($con, "UPDATE `ams_users` SET `Name`='$firstName',`Surname`='$lastName',`Email`='[value-4]',`Phone`='[value-5]',`dateBirth`='$dateofBirth',`Gender`='$genderOption',`localAddress`='[value-12]',`Country`='[value-13]',`provinceAddress`='[value-14]',`districtAddress`='[value-15]',`wadAddress`='[value-16]',`familyMember`='[value-17]',`isSuspended`='[value-18]' WHERE authToken = '$checkUser'") or die("Error!" . $con -> error);
   if(!$con -> error){
     header('Location: ./next.php');
     exit();
@@ -102,7 +106,7 @@ if(isset($_POST[saveProfile])){
  						<option value="Male">Male</option>
  						<option value="Female">Female</option>
  						<option value="Other">Other</option>
- 						<option value="Prefer Not To Say">Prefer Not To Say</option>
+ 						<option value="Prefer-Not-To-Say">Prefer Not To Say</option>
  					</select>
  				</div>
  			</div>

@@ -13,8 +13,6 @@ $isActive = 3;
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
         <li class="breadcrumb-item active" aria-current="page">Invoice Page</li>
       </ol>
       <h6 class="slim-pagetitle">Invoice Page</h6>
@@ -160,8 +158,6 @@ $isActive = 3;
 
 <div class="slim-footer">
   <div class="container">
-    <p>Copyright 2018 &copy; All Rights Reserved. Slim Dashboard Template</p>
-    <p>Designed by: <a href="">ThemePixels</a></p>
   </div><!-- container -->
 </div><!-- slim-footer -->
 

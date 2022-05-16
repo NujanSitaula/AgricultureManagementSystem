@@ -62,7 +62,7 @@
                                $result = mysqli_query($con, $query);
                                 while($cropsCategory = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
-                                 echo "<option value='" . $cropsCategory['cropsType'] . "'>" . $cropsCategory['cropsType'] . " </option>";
+                                 echo "<option value='" . $cropsCategory['cropsType'] . "'"; if($getData['cropsType'] ==  $cropsCategory['cropsType']){echo "selected"; }   echo">" . $cropsCategory['cropsType'] . " </option>";
 
                                } ?>
                              </select>
@@ -83,8 +83,6 @@
  </div>
  <div class="slim-footer">
    <div class="container">
-     <p>Copyright 2018 &copy; All Rights Reserved. Slim Dashboard Template</p>
-     <p>Designed by: <a href="">ThemePixels</a></p>
    </div><!-- container -->
  </div><!-- slim-footer -->
  <script src="../lib/jquery/js/jquery.js"></script>

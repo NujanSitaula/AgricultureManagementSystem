@@ -20,6 +20,10 @@ if (isset($_POST["submit"])) {
     $res = mysqli_query($con, "SELECT * FROM ams_users WHERE Email='$email'") or die($con -> error);
     $GreetName = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $count = mysqli_num_rows($res);
+    if($GreetName['isSuspended'] == 1){
+      $Error = "<strong>Opps!</strong> Your account has been suspended.";
+    }
+    else{
     if ($count == 1) {
         $otp = rand(11111, 99999);
         mysqli_query(
@@ -60,6 +64,7 @@ if (isset($_POST["submit"])) {
     else {
         $Error = "<strong>Opps!</strong> Unable find account with this email.";
     }
+}
 }
 ?>
  <!DOCTYPE html>
