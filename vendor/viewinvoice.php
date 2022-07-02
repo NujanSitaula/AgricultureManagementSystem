@@ -147,7 +147,7 @@ $isActive = 3;
         if($fetchinvoice['isPaid'] == 0){
         echo"<a href='./requestpay.php' class='btn btn-primary btn-block'>Request Payment</a>";
       }
-      echo"<a href='./requestpay.php' class='btn btn-primary btn-block'>Back</a>";
+      echo"<a href='./requestpay.php' class='btn btn-primary btn-block'>Cancel</a>";
         ?>
 
       </div><!-- card-body -->

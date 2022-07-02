@@ -55,7 +55,7 @@ else{
         <div class="slim-header-right">
           <div class="dropdown dropdown-c">
             <a href="#" class="logged-user" data-toggle="dropdown">
-              <img src="../assets/uploads/<?php echo $countUser['dprofile']; ?>" alt="Profile Photo Nujan">
+              <img src="../assets/uploads/<?php echo $countUser['dprofile']; ?>" alt="Profile Photo">
               <span><?php echo $countUser['Name'] . " " . $countUser['Surname']; ?></span>
               <i class="fa fa-angle-down"></i>
             </a>

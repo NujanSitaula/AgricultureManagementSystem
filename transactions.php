@@ -1,6 +1,6 @@
 <?php
 
-$isActive = 2;
+$isActive = 4;
 
 
     require "./header.php";
@@ -72,7 +72,7 @@ if(isset($_POST['editCrops'])){
             <?php
             $query = "SELECT * FROM ams_transaction WHERE id='$checkUserID'";
             $result = mysqli_query($con, $query);
-             while($crops = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+             while($crops == mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
               echo "<tr><td>" . $crops['tranxID'] . "</td><td>" . $crops['amount'] . " </td><td>" . $crops['status'] . " </td><td>" . $crops['mobile'] . " </td><td>" . $crops['datepaid'] . " </td><td> <span class='tx-success'>Paid<span>
               </td></tr>";
