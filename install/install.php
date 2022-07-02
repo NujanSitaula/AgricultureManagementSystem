@@ -133,6 +133,9 @@ class SetupDatabase
   `isSuspended` int(11) NOT NULL DEFAULT 0
 );",
 
+"INSERT INTO `ams_users` (`id`, `Name`, `Surname`, `Email`, `Phone`, `dprofile`, `OTP`, `authToken`, `Environment`, `dateBirth`, `Gender`, `localAddress`, `Country`, `provinceAddress`, `districtAddress`, `wadAddress`, `familyMember`, `isSuspended`) VALUES ('1', 'Hari', 'Bahadur', 'nujan@shotcoder.com.np', '9840938854', '', '', '', 'admin', '', 'male', '', 'Nepal', '', '', '', NULL, '0');",
+
+);
             foreach ($queries as $query) {
                 $conn->query($query);
             }
