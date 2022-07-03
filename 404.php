@@ -30,20 +30,20 @@
 .link_404 {
  color: #fff !important;
  padding: 10px 20px;
- background: #39ac31;
+ background-image: linear-gradient(to right, #1b84e7 0%, #6f42c1 100%);
  margin: 20px 0;
  display: inline-block;
  font-weight: bold;
- border: 2px solid #39bc61;
+ border: 2px solid #6f42c1;
  transition: 0.3s ease-in-out;
  border-radius: 4px;
  text-transform: uppercase;
 }
 .link_404:hover {
  text-decoration: none;
- border-color: #39bc61;
+ border-color: #6f42c1;
  background: transparent;
- color: #39bc61 !important;
+ color: #6f42c1 !important;
 }
 .contant_box_404 {
  margin-top: -50px;
